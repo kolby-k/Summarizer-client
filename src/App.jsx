@@ -1,28 +1,24 @@
-import React, { useState } from "react";
-import "./App.css";
-import SummaryInput from "./components/SummaryInput";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Banner from "./components/Banner";
+import Home from "./pages/Home";
+import SummaryPage from "./pages/SummaryPage";
+import GrammarSpellingPage from "./pages/GrammarSpellingPage";
 
 function App() {
-  const [summaryList, setSummaryList] = useState([]);
-
-  const handleSummaryResponse = (response) => {
-    // Assuming the response contains a `summary` field
-    const summaryText = response.summary;
-    setSummaryList((prev) => [summaryText, ...prev]);
-  };
-
   return (
-    <>
-      <div>
-        <h1>Generate Summary with AI:</h1>
-        <SummaryInput onSuccess={handleSummaryResponse} />
-        <ul>
-          {summaryList.map((summary, index) => (
-            <li key={index}>{summary}</li>
-          ))}
-        </ul>
+    <Router>
+      <div className="bg-gray-100 min-h-screen min-w-screen text-gray-900">
+        <Banner />
+        <main className="container mx-auto p-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/summary" element={<SummaryPage />} />
+            <Route path="/grammar-spelling" element={<GrammarSpellingPage />} />
+          </Routes>
+        </main>
       </div>
-    </>
+    </Router>
   );
 }
 
