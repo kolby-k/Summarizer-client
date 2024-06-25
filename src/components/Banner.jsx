@@ -1,25 +1,44 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Banner = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
-    <nav className="bg-blue-500 p-4 text-white">
+    <nav className="bg-blue-500 p-4 text-white px-8 sticky top-0">
       <ul className="flex space-x-4">
         <li>
-          <Link to="/" className="hover:underline">
-            Home
-          </Link>
+          {!user ? (
+            <Link to="/" className="hover:underline">
+              Home
+            </Link>
+          ) : (
+            <button onClick={handleLogout} className="hover:underline">
+              Logout
+            </button>
+          )}
         </li>
-        <li>
-          <Link to="/summary" className="hover:underline">
-            Summary Tool
-          </Link>
-        </li>
-        <li>
-          <Link to="/grammar-spelling" className="hover:underline">
-            Grammar and Spelling Tool
-          </Link>
-        </li>
+        {user && (
+          <span className="absolute right-10 flex space-x-4">
+            <li>
+              <Link to="/summary" className="hover:underline">
+                Article Summarizer
+              </Link>
+            </li>
+            <li>
+              <Link to="/bookmarks" className="hover:underline">
+                Saved Articles
+              </Link>
+            </li>
+          </span>
+        )}
       </ul>
     </nav>
   );

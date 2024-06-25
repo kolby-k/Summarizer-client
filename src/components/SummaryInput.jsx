@@ -42,23 +42,25 @@ const SummaryInput = ({ onSuccess }) => {
 
   return (
     <div className="relative">
-      <h2 className="text-xl font-semibold mb-4">Enter a URL:</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        Enter the URL of the article you would like summarized:
+      </h2>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
         <input
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           aria-label="URL Input"
-          className="p-2 border rounded"
+          className="p-2 border-2 border-slate-300 rounded "
           placeholder="https://example.com"
-          required // Add required attribute for better UX
+          required
         />
         <button
           type="submit"
           disabled={loading}
-          className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+          className="p-2 bg-blue-500 text-white rounded w-[50%] self-center hover:bg-blue-600 disabled:opacity-50"
         >
-          Submit
+          Generate Summary
         </button>
       </form>
       {loading && <LoadingSpinner />}

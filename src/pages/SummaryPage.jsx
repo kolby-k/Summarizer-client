@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SummaryInput from "../components/SummaryInput";
 import SummaryCard from "../components/SummaryCard";
+import { useSummary } from "../context/SummaryContext";
+import { useBookmarks } from "../context/BookmarkContext";
 
 const SummaryPage = () => {
-  const [summaryList, setSummaryList] = useState([]);
+  const { summary, addSummary } = useSummary();
+  const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
 
   const handleSummaryResponse = (response) => {
     const newSummary = {
@@ -15,27 +18,32 @@ const SummaryPage = () => {
       date: response.date,
       user_id: response.user_id,
     };
-    setSummaryList((prev) => [newSummary, ...prev]);
+    addSummary(newSummary);
   };
-  console.log("summary state: ", JSON.stringify(summaryList));
+
+  const isBookmarked = (url) =>
+    bookmarks.some((bookmark) => bookmark.url === url);
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6">Generate Summary with AI:</h1>
+      <h1 className="text-3xl font-bold mb-6">Summarize Website Articles:</h1>
       <SummaryInput onSuccess={handleSummaryResponse} />
-      <ul className="mt-6 space-y-4">
-        {summaryList.map((summary, index) => (
+      {summary && (
+        <>
+          <h2 className="text-2xl font-bold mt-6 mb-4">Previous Summary</h2>
           <SummaryCard
-            key={index}
             title={summary.title}
             summary={summary.summary}
             conclusion={summary.conclusion}
             bias={summary.bias}
             url={summary.url}
             date={summary.date}
+            isBookmarked={isBookmarked(summary.url)}
+            addBookmark={() => addBookmark(summary)}
+            removeBookmark={() => removeBookmark(summary.url)}
           />
-        ))}
-      </ul>
+        </>
+      )}
     </div>
   );
 };

@@ -43,9 +43,7 @@ const LoadingSpinner = () => {
       <h2 className="mt-8 text-xl text-green-500 font-mono">
         Summarizing Article
       </h2>
-      <h2 className="mt-2 text-lg text-green-500 font-mono">
-        {secondsLeft} seconds remaining ..
-      </h2>
+
       {showExtendedMessage && (
         <h2 className="mt-6 text-md text-yellow-500 font-mono">
           Nearly complete, please wait a moment
