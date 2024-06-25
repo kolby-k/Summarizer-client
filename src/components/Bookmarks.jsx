@@ -9,7 +9,9 @@ const Bookmarks = ({
 }) => {
   return (
     <div className="flex flex-col h-full p-4">
-      <h2 className="text-2xl text-center font-semibold my-2">Your Articles</h2>
+      <h2 className="text-2xl text-center font-semibold my-2">
+        Your Saved Articles
+      </h2>
       <div className="flex flex-col max-w-[80%] h-full self-center">
         {bookmarks.map((bookmark) => (
           <BookmarkCard

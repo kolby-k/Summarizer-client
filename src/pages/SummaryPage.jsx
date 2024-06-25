@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SummaryInput from "../components/SummaryInput";
 import SummaryCard from "../components/SummaryCard";
 import { useSummary } from "../context/SummaryContext";
@@ -26,11 +26,13 @@ const SummaryPage = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6">Summarize Website Articles:</h1>
+      <h1 className="text-3xl font-bold mb-6">Summarize Website Articles</h1>
       <SummaryInput onSuccess={handleSummaryResponse} />
       {summary && (
-        <>
-          <h2 className="text-2xl font-bold mt-6 mb-4">Previous Summary</h2>
+        <div className=" mt-8 border-t border-zinc-600 pt-8">
+          <p className="text-center text-2xl font-semibold mb-4">
+            Current Summary
+          </p>
           <SummaryCard
             title={summary.title}
             summary={summary.summary}
@@ -42,7 +44,7 @@ const SummaryPage = () => {
             addBookmark={() => addBookmark(summary)}
             removeBookmark={() => removeBookmark(summary.url)}
           />
-        </>
+        </div>
       )}
     </div>
   );

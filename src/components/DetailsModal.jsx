@@ -5,7 +5,7 @@ const DetailsModal = ({ article, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+      <div className="bg-slate-300 text-slate-800 p-6 rounded-lg shadow-lg max-w-4xl h-[80%] px-8">
         <button onClick={onClose} className="mb-4">
           Close
         </button>
