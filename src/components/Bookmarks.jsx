@@ -9,7 +9,7 @@ const Bookmarks = ({
 }) => {
   return (
     <div className="flex flex-col h-full p-4">
-      <div className="flex flex-col w-full h-full self-center">
+      <div className="flex flex-col w-full h-full self-center gap-2">
         {bookmarks.map((bookmark) => (
           <BookmarkCard
             key={bookmark.url}

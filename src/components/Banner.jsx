@@ -1,11 +1,13 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSummary } from "../context/SummaryContext";
+import { BiSolidBookReader } from "react-icons/bi";
 const Banner = () => {
   const { user, logout } = useAuth();
   const { removeSummary } = useSummary();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -13,10 +15,13 @@ const Banner = () => {
     navigate("/");
   };
 
+  console.log(location.pathname);
+
   return (
-    <nav className="bg-blue-500 p-4 text-white px-8 sticky top-0">
-      <ul className="flex space-x-4">
-        <li>
+    <nav className="bg-blue-600 p-4 text-slate-200 sticky top-0">
+      <div className="flex justify-between items-centermb-2">
+        {/* Left aligned items */}
+        <div className="mt-2">
           {!user ? (
             <Link to="/" className="hover:underline">
               Home
@@ -26,22 +31,42 @@ const Banner = () => {
               Logout
             </button>
           )}
-        </li>
+        </div>
+
+        {/* Right aligned items */}
         {user && (
-          <span className="absolute right-10 flex space-x-4">
-            <li>
-              <Link to="/summary" className="hover:underline">
-                Article Summarizer
-              </Link>
-            </li>
-            <li>
-              <Link to="/bookmarks" className="hover:underline">
-                Saved Articles
-              </Link>
-            </li>
-          </span>
+          <div className="flex mt-2 space-x-4">
+            <Link
+              to="/summary"
+              className={`hover:underline ${
+                location.pathname === "/summary" ? "font-bold" : null
+              }`}
+            >
+              Article Summarizer
+            </Link>
+            <Link
+              to="/bookmarks"
+              className={`hover:underline ${
+                location.pathname === "/bookmarks" ? "font-bold" : null
+              }`}
+            >
+              Saved Articles
+            </Link>
+          </div>
         )}
-      </ul>
+      </div>
+
+      {/* Centered items */}
+      <Link to="/">
+        <div className="absolute cursor-pointer left-1/2 top-2 transform -translate-x-1/2 flex flex-col items-center">
+          <span className="flex flex-col items-center justify-center">
+            <BiSolidBookReader size={28} />
+            <span className="font-thin text-sm ml-2 text-slate-200">
+              Summarizer
+            </span>
+          </span>
+        </div>
+      </Link>
     </nav>
   );
 };

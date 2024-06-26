@@ -15,8 +15,8 @@ const DetailsModal = ({ article, onClose }) => {
   const bulletPoints = parseConclusion(article.conclusion);
 
   return (
-    <div className="fixed pb-20 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div className="relative bg-zinc-800 text-slate-300 font-light p-6 rounded-lg shadow-lg max-w-4xl max-h-[80%] overflow-y-auto px-8">
+    <div className="fixed pb-20 inset-0 bg-slate-700/90 flex justify-center items-center">
+      <div className="relative border-[0.5px] border-slate-800 bg-slate-900 text-slate-300 font-light p-6 rounded-lg shadow-lg max-w-4xl max-h-[80%] overflow-y-auto px-8">
         <IoMdCloseCircle
           onClick={onClose}
           className="absolute top-3 right-4 mb-4 cursor-pointer"
@@ -36,7 +36,7 @@ const DetailsModal = ({ article, onClose }) => {
             </span>
           </strong>
         </p>
-        <ul className="mb-8 list-disc list-inside">
+        <ul className="mb-8 ml-6 list-disc list-inside">
           {bulletPoints.map((point, index) => (
             <li key={index}>{point}</li>
           ))}

@@ -21,9 +21,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      // Implement your login logic here
-      // For example, call an API to authenticate the user
-      const response = await fakeApiLogin(email, password); // Replace with your API call
+      const response = await fakeApiLogin(email, password);
       const { userId, name, token } = response;
 
       const userData = { userId, email, name, token };
@@ -41,14 +39,14 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     try {
       // Implement your signup logic here
-      const response = await fakeApiSignup(name, email, password); // Replace with your API call
+      const response = await fakeApiSignup(name, email, password);
       const { userId, token } = response;
 
       const userData = { userId, name, email, token };
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
     } catch (err) {
-      setError("Signup failed");
+      setError("Signup failed: please use the email 'test@test.com'.");
     } finally {
       setLoading(false);
     }

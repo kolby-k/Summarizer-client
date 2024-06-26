@@ -34,8 +34,10 @@ const BookmarkCard = ({
         />
       </div>
       <div className="p-4 flex-col items-start">
-        <h2 className="text-xl text-center font-semibold mb-4">{title}</h2>
-        <p className="mb-6 text-md font-medium">
+        <h2 className="text-xl text-slate-100 text-center font-semibold mb-4">
+          {title}
+        </h2>
+        <p className="mb-6 text-md font-medium text-slate-200">
           <strong>Summary: </strong>
           {summary}
         </p>
