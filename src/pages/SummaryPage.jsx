@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import SummaryInput from "../components/SummaryInput";
 import SummaryCard from "../components/SummaryCard";
 import { useSummary } from "../context/SummaryContext";
 import { useBookmarks } from "../context/BookmarkContext";
+import DetailsModal from "../components/DetailsModal";
 
 const SummaryPage = () => {
   const { summary, addSummary } = useSummary();
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
+
+  const handleDetailsModal = (article) => {
+    setSelectedArticle(article);
+  };
+
+  const closeModal = () => {
+    setSelectedArticle(null);
+  };
 
   const handleSummaryResponse = (response) => {
     const newSummary = {
@@ -26,25 +36,27 @@ const SummaryPage = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6">Summarize Website Articles</h1>
+      <h1 className="text-3xl text-center font-bold mb-6">
+        Summarize Website Articles
+      </h1>
       <SummaryInput onSuccess={handleSummaryResponse} />
       {summary && (
-        <div className=" mt-8 border-t border-zinc-600 pt-8">
+        <div className="flex flex-col items-center justify-center mt-8 border-t border-zinc-600 pt-8">
           <p className="text-center text-2xl font-semibold mb-4">
             Current Summary
           </p>
           <SummaryCard
             title={summary.title}
             summary={summary.summary}
-            conclusion={summary.conclusion}
-            bias={summary.bias}
-            url={summary.url}
-            date={summary.date}
             isBookmarked={isBookmarked(summary.url)}
             addBookmark={() => addBookmark(summary)}
             removeBookmark={() => removeBookmark(summary.url)}
+            toggleDetailsModal={() => handleDetailsModal(summary)}
           />
         </div>
+      )}
+      {selectedArticle && (
+        <DetailsModal article={selectedArticle} onClose={closeModal} />
       )}
     </div>
   );

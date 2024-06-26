@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { CiBookmarkPlus, CiBookmarkMinus } from "react-icons/ci";
-
+import { FaStar } from "react-icons/fa6";
+import { CiStar } from "react-icons/ci";
 const SummaryCard = ({
   title,
   summary,
-  conclusion,
-  bias,
-  url,
-  date,
   isBookmarked,
   addBookmark,
   removeBookmark,
+  toggleDetailsModal,
 }) => {
   const [bookmarked, setBookmarked] = useState(isBookmarked);
-
   useEffect(() => {
     setBookmarked(isBookmarked);
   }, [isBookmarked]);
@@ -28,65 +24,35 @@ const SummaryCard = ({
   };
 
   return (
-    <div className="bg-gray-700 border border-gray-500 text-gray-200 rounded-lg p-4 mb-4 shadow-lg">
-      <div className="flex justify-end -mt-2">
-        {bookmarked ? (
-          <CiBookmarkMinus
+    <div className="bg-slate-400/30 border border-zinc-700 rounded-lg h-auto w-auto p-2 mb-2">
+      <div className="flex justify-end mr-2 -mb-4">
+        {isBookmarked ? (
+          <FaStar
             onClick={handleBookmark}
             className="cursor-pointer"
             size={28}
-            color="red"
+            color="yellow"
           />
         ) : (
-          <CiBookmarkPlus
+          <CiStar
             onClick={handleBookmark}
             className="cursor-pointer"
             size={28}
-            color="green"
+            color="yellow"
           />
         )}
       </div>
-      <div className="flex flex-col space-y-4">
-        <h2 className="text-2xl text-center font-semibold">{title}</h2>
-        <p className="text-lg">
-          <strong>Summary:</strong> {summary}
-        </p>
-        <div className="flex justify-between">
-          <div className="w-1/2 pr-2">
-            <p className="text-md">
-              <strong>TLDR:</strong> {conclusion}
-            </p>
-          </div>
-          <div className="w-1/2 pl-2">
-            <p className="text-md">
-              <strong>Bias:</strong> {bias}
-            </p>
-          </div>
-        </div>
-        <p className="text-sm">
-          Summary Completed:{" "}
-          {new Date(date).toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          })}{" "}
-          {new Date(date).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
-        <p className="text-sm">
-          Original Source:{" "}
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:underline"
+      <div className="p-4 flex-col items-start">
+        <h2 className="text-2xl text-center font-semibold mb-4">{title}</h2>
+        <p className="mb-6 text-md font-normal">{summary}</p>
+        <span className="flex justify-center">
+          <button
+            onClick={toggleDetailsModal}
+            className="text-md bg-blue-500 border border-blue-400 rounded-lg px-4 py-2 text-slate-100 font-semibold hover:bg-blue-600"
           >
-            {url}
-          </a>
-        </p>
+            See More
+          </button>
+        </span>
       </div>
     </div>
   );

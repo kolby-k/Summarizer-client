@@ -31,7 +31,7 @@ function SignInPage() {
   }, [user]);
 
   return (
-    <div className="p-6 bg-slate-200/10 rounded-xl min-h-screen flex flex-col items-center">
+    <div className="p-6  rounded-xl min-h-screen flex flex-col items-center">
       <header className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-2">Sign In Below</h1>
       </header>

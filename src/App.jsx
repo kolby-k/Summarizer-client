@@ -16,7 +16,7 @@ function App() {
       <BookmarkProvider>
         <SummaryProvider>
           <Router>
-            <div className="bg-slate-900 text-slate-300 min-h-screen min-w-screen">
+            <div className="bg-slate-900 font-main text-slate-300 min-h-screen min-w-screen">
               <Banner />
               <main className="container mx-auto p-4">
                 <Routes>

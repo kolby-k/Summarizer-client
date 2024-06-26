@@ -38,7 +38,7 @@ function SignUpPage() {
   }, [user]);
 
   return (
-    <div className="p-6 bg-slate-200/10 rounded-xl min-h-screen flex flex-col items-center">
+    <div className="p-6  rounded-xl min-h-screen flex flex-col items-center">
       <header className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-2">Sign Up Below</h1>
         <h2 className="text-md font-semibold mb-4">

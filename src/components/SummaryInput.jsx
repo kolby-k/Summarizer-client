@@ -58,7 +58,7 @@ const SummaryInput = ({ onSuccess }) => {
         <button
           type="submit"
           disabled={loading}
-          className="p-2 bg-blue-500 text-white rounded w-[25%] self-center hover:bg-blue-600 disabled:opacity-50"
+          className="p-2 bg-blue-500 border border-blue-400 text-white rounded w-[25%] self-center hover:bg-blue-600 disabled:opacity-50"
         >
           Generate Summary
         </button>
