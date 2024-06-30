@@ -26,15 +26,23 @@ const SummaryInput = ({ onSuccess }) => {
       );
 
       if (!response.ok) {
+        const data = await response.json();
+
+        if (data.error === "Could not extract main article content") {
+          throw new Error(
+            "Sorry, the website you requested has prevented our tool from processing a summary. Please try again with a different website."
+          );
+        }
         throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
+
       data.url = inputValue;
       onSuccess(data);
       setInputValue("");
     } catch (error) {
-      setError("Error in fetching summary: " + error.message);
+      setError("Error generating summary: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -64,7 +72,9 @@ const SummaryInput = ({ onSuccess }) => {
         </button>
       </form>
       {loading && <LoadingSpinner />}
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {error && (
+        <p className="text-red-500 mt-6 text-lg text-center">{error}</p>
+      )}
     </div>
   );
 };

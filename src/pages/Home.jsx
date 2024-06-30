@@ -22,39 +22,44 @@ const SignUpSignIn = () => (
 );
 
 const AboutSummarizer = () => (
-  <section className="bg-gradient-to-r from-slate-900 to-slate-700 border-[0.5px] border-slate-600/50 p-6 rounded-lg shadow-md mb-8">
+  <section className="bg-gradient-to-r from-slate-900 to-slate-700 border-[0.5px] border-slate-600/50 p-6 rounded-lg shadow-md mb-8 cursor-default hover:scale-105 duration-300">
     <h3 className="text-xl font-bold mb-4">About Summarizer</h3>
     <p className="mb-4">
-      Welcome to Summarizer, your go-to tool for quickly understanding the
-      essence of any online article. Just drop the URL of the article you need
-      summarized, within seconds you'll receive an accurate and concise summary.
-      Effortless reading, one click away!
+      Welcome to Summarizer, your efficient tool for quickly grasping the core
+      ideas of any online article. Just enter the URL of the article, and within
+      seconds, you'll receive an accurate and concise summary. Simplify your
+      reading experience with just one click!
     </p>
   </section>
 );
 
 const HowItWorks = () => (
-  <section className="bg-gradient-to-r from-slate-900 to-slate-800 border-[0.5px] border-slate-600/50 p-6 rounded-lg shadow-md mb-8 cursor-pointer  hover:scale-110 duration-300">
+  <section className="bg-gradient-to-r from-slate-900 to-slate-800 border-[0.5px] border-slate-600/50 p-6 rounded-lg shadow-md mb-8 cursor-default  hover:scale-105 duration-300">
     <h3 className="text-xl font-bold mb-4">How it Works</h3>
     <p className="mb-4">
-      Ever wonder what goes on behind the scenes? When you provide a URL, a
-      server begins by processing the HTML content of the page. Once that's
-      done, the article's text is sent to a trained language model where it
-      reviews the content, understands the articles main ideas, and crafts a
-      clear, original summary— all that in just a few seconds!
+      When you provide a URL, a server will process the HTML content of the
+      page, extracting the main body of text. This text is then sent to a
+      trained language model that analyzes it and generates a concise summary.
+      To handle multiple requests efficiently, I use worker threads in Node.js,
+      which allows concurrent processing without blocking the main event loop.
+      Each request is processed in its own thread, ensuring independent handling
+      for a quicker over all response.
     </p>
   </section>
 );
 
 const WhoItsFor = () => (
-  <section className="bg-gradient-to-r from-slate-800 to-slate-700 border-[0.5px] border-slate-600/50 p-6 rounded-lg shadow-md mb-8 cursor-pointer hover:scale-110 duration-300">
+  <section className="bg-gradient-to-r from-slate-800 to-slate-700 border-[0.5px] border-slate-600/50 p-6 rounded-lg shadow-md mb-8 cursor-default hover:scale-105 duration-300">
     <h3 className="text-xl font-bold mb-4">Who it's For</h3>
     <p className="mb-4">
-      Summarizer is for everyone! Whether you're a student trying to keep up
-      with assignments, a professional needing quick insights, or an avid reader
-      looking to stay informed, Summarizer makes it simple. Get the information
-      you need without scrolling through endless text. Save time and stay smart
-      with Summarizer!
+      Summarizer is a handy tool created to help a wide range of users. Whether
+      you’re a student juggling multiple assignments, a professional needing
+      quick insights, or an avid reader trying to stay up-to-date, Summarizer
+      makes it easy. It delivers concise summaries that help you save time and
+      quickly understand the main points of long articles. This project
+      highlights my ability to develop efficient and user-friendly applications,
+      demonstrating my skills in backend development and concurrent processing
+      with Node.js.
     </p>
   </section>
 );
@@ -63,9 +68,11 @@ const Home = () => {
   return (
     <div className="p-6 rounded-xl h-full flex gap-10 flex-col items-center">
       <header className="text-center mb-4">
-        <h1 className="text-4xl font-bold mb-2">Welcome to Summarizer!</h1>
+        <h1 className="text-4xl font-bold mb-2">
+          Welcome to <span className="underline">Summarizer</span>
+        </h1>
         <h2 className="text-2xl font-semibold mb-4">
-          Generate quick, accurate summaries with just a single URL
+          Generate quick, accurate article summaries with just a single URL!
         </h2>
       </header>
 

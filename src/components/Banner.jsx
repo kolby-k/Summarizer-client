@@ -15,19 +15,25 @@ const Banner = () => {
     navigate("/");
   };
 
+  console.log(location);
+
   return (
     <nav className="bg-blue-600 p-4 text-slate-200 sticky top-0">
       <div className="flex justify-between items-centermb-2">
         {/* Left aligned items */}
         <div className="mt-2">
-          {!user ? (
+          {location.pathname !== "/" ? (
             <Link to="/" className="hover:underline">
               Home
             </Link>
-          ) : (
+          ) : user ? (
             <button onClick={handleLogout} className="hover:underline">
               Logout
             </button>
+          ) : (
+            <Link to="/sign-in">
+              <button className="hover:underline">Login</button>
+            </Link>
           )}
         </div>
 

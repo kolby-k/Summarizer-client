@@ -40,7 +40,7 @@ const SummaryPage = () => {
         Summarize Website Articles
       </h1>
       <SummaryInput onSuccess={handleSummaryResponse} />
-      {summary && (
+      {summary ? (
         <div className="flex flex-col items-center justify-center mt-8 border-t border-zinc-600 pt-8">
           <p className="text-center text-2xl font-semibold mb-4">
             Current Summary
@@ -53,6 +53,22 @@ const SummaryPage = () => {
             removeBookmark={() => removeBookmark(summary.url)}
             toggleDetailsModal={() => handleDetailsModal(summary)}
           />
+        </div>
+      ) : (
+        <div>
+          <p className="mt-32 text-center">
+            Please note that the server is hosted on a free instance of{" "}
+            <a
+              className="underline text-blue-400"
+              href="https://docs.render.com/web-services"
+              target="_blank"
+            >
+              Renders web service
+            </a>
+            . As a result, it may take up to 60 seconds to initialize the
+            server. Therefore, your first request could take significantly
+            longer, possibly up to 1-2 minutes.
+          </p>
         </div>
       )}
       {selectedArticle && (
