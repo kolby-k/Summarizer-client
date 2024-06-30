@@ -15,8 +15,6 @@ const Banner = () => {
     navigate("/");
   };
 
-  console.log(location.pathname);
-
   return (
     <nav className="bg-blue-600 p-4 text-slate-200 sticky top-0">
       <div className="flex justify-between items-centermb-2">
