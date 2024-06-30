@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
     } catch (err) {
-      setError("Signup failed: please use the email 'test@test.com'.");
+      setError("Sign-up blocked. Please login with the test account!");
     } finally {
       setLoading(false);
     }
@@ -57,9 +57,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
   };
 
+  const clearError = () => {
+    return setError(null);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, login, signup, logout, loading, error }}
+      value={{ user, login, signup, logout, loading, error, clearError }}
     >
       {children}
     </AuthContext.Provider>
@@ -87,11 +91,7 @@ const fakeApiLogin = (email, password) => {
 const fakeApiSignup = (name, email, password) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (email === "test@test.com") {
-        resolve({ userId: 16, name, token: "abcd1234" });
-      } else {
-        reject(new Error("User already exists"));
-      }
+      reject(new Error("Sign-up blocked. Please login with the test account!"));
     }, 1000);
   });
 };

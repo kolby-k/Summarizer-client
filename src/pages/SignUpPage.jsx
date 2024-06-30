@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function SignUpPage() {
-  const { user, signup, loading, error } = useAuth();
+  const { user, signup, loading, error, clearError } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,6 +33,8 @@ function SignUpPage() {
   useEffect(() => {
     if (user) {
       navigate("/summary");
+    } else {
+      clearError();
     }
     return;
   }, [user]);
@@ -122,7 +124,9 @@ function SignUpPage() {
           />
         </div>
 
-        {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+        {error && (
+          <div className="text-red-500 text-sm mb-4 text-center">{error}</div>
+        )}
 
         <div className="flex flex-col items-center justify-center">
           <button

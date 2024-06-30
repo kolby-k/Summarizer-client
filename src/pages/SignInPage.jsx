@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function SignInPage() {
-  const { user, login, loading, error } = useAuth();
+  const { user, login, loading, error, clearError } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -26,6 +26,8 @@ function SignInPage() {
   useEffect(() => {
     if (user) {
       navigate("/summary");
+    } else {
+      clearError();
     }
     return;
   }, [user]);
@@ -76,7 +78,9 @@ function SignInPage() {
           />
         </div>
 
-        {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+        {error && (
+          <div className="text-red-500 text-sm text-center mb-4">{error}</div>
+        )}
 
         <div className="flex flex-col items-center justify-center">
           <button

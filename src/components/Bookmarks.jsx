@@ -21,6 +21,11 @@ const Bookmarks = ({
             toggleDetailsModal={() => onToggleDetailsModal(bookmark)}
           />
         ))}
+        {bookmarks.length < 1 ? (
+          <div className="text-center pt-6">
+            <h2>Nothing here to show yet!</h2>
+          </div>
+        ) : null}
       </div>
     </div>
   );
