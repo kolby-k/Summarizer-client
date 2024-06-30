@@ -44,7 +44,7 @@ const SummaryCard = ({
       </div>
       <div className="p-4 flex-col items-start">
         <h2 className="text-2xl text-center font-semibold mb-4">{title}</h2>
-        <p className="mb-6 text-md font-normal">{summary}</p>
+        <p className="mb-6 text-md font-light">{summary}</p>
         <span className="flex justify-center">
           <button
             onClick={toggleDetailsModal}

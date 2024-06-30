@@ -37,7 +37,7 @@ const BookmarkCard = ({
         <h2 className="text-xl text-slate-100 text-center font-semibold mb-4">
           {title}
         </h2>
-        <p className="mb-6 text-md font-medium text-slate-200">
+        <p className="mb-6 text-md font-light text-slate-200">
           <strong>Summary: </strong>
           {summary}
         </p>
