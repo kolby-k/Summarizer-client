@@ -5,7 +5,7 @@ const Bookmarks = ({ showDetailsModal, bookmarks }) => {
   console.log("debug: ", bookmarks);
 
   return (
-    <div className="flex flex-col h-full p-4">
+    <div className="flex flex-col h-full md:p-4">
       <div className="flex flex-col w-full h-full self-center gap-8">
         {bookmarks.map((bookmark) => (
           <SummaryCard

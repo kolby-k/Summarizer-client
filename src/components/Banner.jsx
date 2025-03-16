@@ -28,29 +28,35 @@ const Banner = () => {
   return (
     <>
       {showBanner && (
-        <div className="sticky top-0 w-[100vw] bg-slate-900 border-b-white border-b-2">
-          <p className="text-center p-2">
+        <div className="sticky top-0 w-full bg-slate-900 border-b border-white">
+          <div className="p-2 text-center text-sm">
             Summarizer is a demo web application created by{" "}
             <a href="https://kolbyk.ca" className="underline text-blue-400">
               Kolby Klassen
             </a>
-          </p>
+          </div>
           <button
-            className="absolute right-10 top-[25%] text-sm font-thin cursor-pointer"
+            className="block md:absolute md:right-10 md:top-1/2 md:-translate-y-1/2 text-red-400 cursor-pointer text-sm p-2"
             onClick={() => {
               sessionStorage.setItem("hide-banner", "true");
               setShowBanner(false);
-              return;
             }}
           >
-            <IoIosCloseCircleOutline size={20} />
+            Hide <IoIosCloseCircleOutline size={20} className="inline ml-1" />
           </button>
         </div>
       )}
-      <nav className="bg-blue-600 p-4 text-slate-200 sticky top-0">
-        <div className="flex justify-between items-centermb-2">
-          {/* Left aligned items */}
-          <div className="mt-2">
+      <nav className="bg-blue-600 p-2 text-slate-200 sticky top-0">
+        <div className="flex flex-col md:flex-row px-2 md:px-4 justify-between items-center">
+          {/* Left section: Login/Logout and Logo */}
+          <div className="w-full flex justify-between items-center">
+            {/* Centered logo is now part of the flex container */}
+            <Link to="/" className="flex flex-col items-center">
+              <BiSolidBookReader size={28} />
+              <span className="font-thin text-sm text-slate-200">
+                Summarizer
+              </span>
+            </Link>
             {user ? (
               <button onClick={handleLogout} className="hover:underline">
                 Logout
@@ -61,42 +67,28 @@ const Banner = () => {
               </Link>
             )}
           </div>
-
-          {/* Right aligned items */}
-          {user && (
-            <div className="flex mt-2 space-x-8 mr-6">
-              <Link
-                to="/summary"
-                className={`hover:underline ${
-                  location.pathname === "/summary" ? "font-semibold" : null
-                }`}
-              >
-                Article Summarizer
-              </Link>
-              <Link
-                to="/bookmarks"
-                className={`hover:underline ${
-                  location.pathname === "/bookmarks" ? "font-semibold" : null
-                }`}
-              >
-                Saved Articles
-              </Link>
-            </div>
-          )}
         </div>
-
-        {/* Centered items */}
-        <Link to="/">
-          <div className="absolute cursor-pointer left-1/2 top-2 transform -translate-x-1/2 flex flex-col items-center">
-            <span className="flex flex-col items-center justify-center">
-              <BiSolidBookReader size={28} />
-              <span className="font-thin text-sm ml-2 text-slate-200">
-                Summarizer
-              </span>
-            </span>
-          </div>
-        </Link>
       </nav>
+      {user && (
+        <div className="h-10 flex flex-row justify-center items-center gap-4 md:gap-8 text-gray-900 bg-blue-200">
+          <Link
+            to="/summary"
+            className={`mt-1 hover:underline ${
+              location.pathname === "/summary" ? "font-semibold" : ""
+            }`}
+          >
+            Summarize Article
+          </Link>
+          <Link
+            to="/bookmarks"
+            className={`mt-1 hover:underline ${
+              location.pathname === "/bookmarks" ? "font-semibold" : ""
+            }`}
+          >
+            View Bookmarks
+          </Link>
+        </div>
+      )}
     </>
   );
 };

@@ -2,19 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SignUpSignIn = () => (
-  <section className="flex flex-col h-[25vh] justify-center gap-4 items-center bg-gradient-to-r from-blue-900 to-blue-600 border-[0.5px] border-blue-500 rounded-lg shadow-md mb-8">
-    <h3 className="text-4xl font-semibold mb-4 text-center">
+  <section className="flex flex-col flex-1 justify-center items-center text-center bg-gradient-to-r from-blue-900 to-blue-600 border-[0.5px] border-blue-500 rounded-lg shadow-md mb-8">
+    <h3 className="text-2xl md:text-3xl font-medium p-8">
       Sign Up to Get Started!
     </h3>
     <Link
       to="/sign-up"
-      className="bg-blue-500 text-white text-xl px-20 py-3 rounded-lg hover:bg-blue-400 border-2 border-blue-800 transition mb-4"
+      className="bg-blue-500 text-white text-xl px-20 py-3 rounded-lg hover:bg-blue-400 border-2 border-blue-800 transition"
     >
-      Sign Up
+      Sign Up for Free
     </Link>
     <Link
       to="/sign-in"
-      className="text-blue-300 hover:text-blue-200 text-[18px] px-4 py-2 rounded  cursor-pointer transition"
+      className="text-blue-300 hover:text-blue-200 text-base md:text-[18px] py-8 px-4 rounded  cursor-pointer transition"
     >
       Already have an account? Sign in here!
     </Link>
@@ -67,12 +67,12 @@ const WhoItsFor = () => (
 
 const Home = () => {
   return (
-    <div className="p-6 rounded-xl h-full flex flex-col items-center">
-      <div className="text-center mb-4">
-        <h1 className="text-4xl font-bold mb-2">
+    <div className="p-2 rounded-xl h-full flex flex-col">
+      <div className="text-center py-2 mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">
           Welcome to <span className="underline">Summarizer</span>
         </h1>
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="text-xl md:text-2xl font-normal mb-4">
           Generate quick, accurate article summaries with just a single URL!
         </h2>
       </div>
@@ -83,21 +83,19 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <HowItWorks />
           <WhoItsFor />
-          <div className="flex w-[50vw]">
-            <p className="text-slate-400 font-thin text-sm">
-              Note: This website is part of{" "}
-              <a
-                className="underline"
-                target="_blank"
-                href="https://kolby-k.netlify.app/"
-              >
-                Kolby Klassen's
-              </a>{" "}
-              personal portfolio and is intended for demonstration purposes
-              only. Consequently, the sign-up functionality is disabled, and
-              access is available using a test account for login.
-            </p>
-          </div>
+        </div>
+        <div className="w-full mx-auto ">
+          <p className="text-slate-400 font-thin text-center text-sm">
+            Note: This website is part of{" "}
+            <a
+              className="underline text-blue-500"
+              target="_blank"
+              href="https://kolby-k.netlify.app/"
+            >
+              Kolby Klassen's
+            </a>{" "}
+            personal portfolio and is intended for demonstration purposes only.
+          </p>
         </div>
       </div>
     </div>

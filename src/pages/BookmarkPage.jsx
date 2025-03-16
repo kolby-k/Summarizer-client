@@ -15,8 +15,8 @@ const BookmarkPage = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl text-center font-bold mb-6">Saved Articles</h1>
+    <div>
+      <h1 className="text-3xl text-center font-bold my-6">Saved Articles</h1>
       <Bookmarks
         bookmarks={bookmarks}
         showDetailsModal={handleShowDetailsModal}

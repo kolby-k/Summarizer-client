@@ -16,8 +16,8 @@ const SummaryPage = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl text-center font-bold mb-6">
+    <div className="">
+      <h1 className="text-3xl text-center font-bold pt-4 mb-8">
         Summarize Website Articles
       </h1>
       <SummaryInput />
@@ -32,7 +32,7 @@ const SummaryPage = () => {
           />
         </div>
       ) : (
-        <div className="w-full absolute bottom-10 left-1/2 -translate-x-1/2 font-thin">
+        <div className="w-full text-sm absolute bottom-10 left-1/2 -translate-x-1/2 font-thin">
           <p className="mt-32 text-center">
             Note: The backend server is hosted on a{" "}
             <a

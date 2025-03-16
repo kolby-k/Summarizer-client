@@ -24,29 +24,31 @@ const SummaryCard = ({ article, showDetailsModal }) => {
 
   return (
     <div className="relative bg-slate-800 border border-zinc-700 shadow-2xl shadow-gray-500/20 rounded-lg h-auto w-auto py-8 mb-2 overflow-hidden">
-      <div className="absolute right-4 top-4">
-        {isBookmarked ? (
-          <FaStar
-            onClick={() => removeBookmark(article.url)}
-            className="cursor-pointer"
-            size={28}
-            color="yellow"
-          />
-        ) : (
-          <CiStar
-            onClick={() => addBookmark(article)}
-            className="cursor-pointer"
-            size={28}
-            color="gray"
-          />
-        )}
-      </div>
-      <div className="flex flex-col gap-4 mt-4 justify-evenly items-center">
-        <h2 className="text-3xl text-center font-medium">{title}</h2>
+      <div className="flex flex-col gap-4 md:mt-4 justify-evenly items-center">
+        <h2 className="text-xl md:text-3xl text-center font-semibold md:font-medium md:w-[80%]">
+          {title}
+        </h2>
+        <div className="-my-2 md:my-0 md:absolute md:right-4 md:top-4">
+          {isBookmarked ? (
+            <FaStar
+              onClick={() => removeBookmark(article.url)}
+              className="cursor-pointer"
+              size={28}
+              color="yellow"
+            />
+          ) : (
+            <CiStar
+              onClick={() => addBookmark(article)}
+              className="cursor-pointer"
+              size={28}
+              color="gray"
+            />
+          )}
+        </div>
         <span className="border-b-[1px] border-gray-500 w-[30%] mt-2 mb-4 mx-auto"></span>
         <div className="w-[90%] mx-auto">
           {sentences.map((sentence, idx) => (
-            <p key={idx} className="mb-6 text-[19px] font-normal">
+            <p key={idx} className="mb-6 md:text-[19px] font-normal">
               - {sentence}
             </p>
           ))}

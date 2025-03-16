@@ -128,7 +128,7 @@ function SignUpPage() {
           <div className="text-red-500 text-sm mb-4 text-center">{error}</div>
         )}
 
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col text-center justify-center">
           <button
             type="submit"
             className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
@@ -138,7 +138,7 @@ function SignUpPage() {
           </button>
           <Link
             to="/sign-in"
-            className="text-blue-500 px-4 py-2 rounded hover:text-blue-400 cursor-pointer transition"
+            className="text-blue-500 px-4 rounded hover:text-blue-400 cursor-pointer transition mt-6 leading-[1.2]"
           >
             Already have an account? Sign in here!
           </Link>
