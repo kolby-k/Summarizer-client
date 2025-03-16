@@ -2,8 +2,6 @@ import React from "react";
 import SummaryCard from "./SummaryCard";
 
 const Bookmarks = ({ showDetailsModal, bookmarks }) => {
-  console.log("debug: ", bookmarks);
-
   return (
     <div className="flex flex-col h-full md:p-4">
       <div className="flex flex-col w-full h-full self-center gap-8">

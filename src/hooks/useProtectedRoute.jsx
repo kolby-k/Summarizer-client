@@ -10,7 +10,6 @@ function useProtectedRoute() {
   const path = location.pathname;
 
   useEffect(() => {
-    console.log("Effect running: ", user);
     if (!user) {
       navigate("/");
       setError(`Not Authenticated: Can't proceed to '${path}'`);
