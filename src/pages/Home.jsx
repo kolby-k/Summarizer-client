@@ -67,7 +67,7 @@ const WhoItsFor = () => (
 
 const Home = () => {
   return (
-    <div className="p-2 rounded-xl h-full flex flex-col">
+    <div className="p-2 rounded-xl h-full items-center flex flex-col">
       <div className="text-center py-2 mb-4">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
           Welcome to <span className="underline">Summarizer</span>
