@@ -4,11 +4,14 @@ import SummaryCard from "../components/SummaryCard";
 import { useSummary } from "../context/SummaryContext";
 import { useBookmarks } from "../context/BookmarkContext";
 import DetailsModal from "../components/DetailsModal";
+import useProtectedRoute from "../hooks/useProtectedRoute";
 
 const SummaryPage = () => {
   const { summary, addSummary } = useSummary();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
+
+  useProtectedRoute();
 
   const handleDetailsModal = (article) => {
     setSelectedArticle(article);

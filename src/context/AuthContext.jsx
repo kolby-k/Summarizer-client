@@ -1,21 +1,15 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-// Create a Context for Auth
 const AuthContext = createContext();
 
-// Create a provider component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = sessionStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // Check if user is already logged in
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-  }, []);
 
   const login = async (email, password) => {
     setLoading(true);
@@ -26,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
       const userData = { userId, email, name, token };
       setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
+      sessionStorage.setItem("user", JSON.stringify(userData));
     } catch (err) {
       setError("Invalid email or password");
     } finally {
@@ -38,13 +32,12 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      // Implement your signup logic here
       const response = await fakeApiSignup(name, email, password);
       const { userId, token } = response;
 
       const userData = { userId, name, email, token };
       setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
+      sessionStorage.setItem("user", JSON.stringify(userData));
     } catch (err) {
       setError("Sign-up blocked. Please login with the test account!");
     } finally {
@@ -54,30 +47,34 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
   };
 
-  const clearError = () => {
-    return setError(null);
-  };
+  const clearError = () => setError(null);
 
   return (
     <AuthContext.Provider
-      value={{ user, login, signup, logout, loading, error, clearError }}
+      value={{
+        user,
+        login,
+        signup,
+        logout,
+        loading,
+        error,
+        clearError,
+        setError,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use the AuthContext
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
 
-// Fake API login function for demonstration purposes
-const fakeApiLogin = (email, password) => {
-  return new Promise((resolve, reject) => {
+// Fake API login function
+const fakeApiLogin = (email, password) =>
+  new Promise((resolve, reject) => {
     setTimeout(() => {
       if (email === "test@test.com" && password === "test") {
         resolve({ userId: 16, name: "John Doe", token: "abcd1234" });
@@ -86,12 +83,10 @@ const fakeApiLogin = (email, password) => {
       }
     }, 1000);
   });
-};
 
-const fakeApiSignup = (name, email, password) => {
-  return new Promise((resolve, reject) => {
+const fakeApiSignup = (name, email, password) =>
+  new Promise((_, reject) => {
     setTimeout(() => {
       reject(new Error("Sign-up blocked. Please login with the test account!"));
     }, 1000);
   });
-};
