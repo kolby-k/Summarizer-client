@@ -1,24 +1,17 @@
 import React from "react";
-import BookmarkCard from "./BookmarkCard";
+import SummaryCard from "./SummaryCard";
 
-const Bookmarks = ({
-  bookmarks,
-  addBookmark,
-  removeBookmark,
-  onToggleDetailsModal,
-}) => {
+const Bookmarks = ({ showDetailsModal, bookmarks }) => {
+  console.log("debug: ", bookmarks);
+
   return (
     <div className="flex flex-col h-full p-4">
-      <div className="flex flex-col w-full h-full self-center gap-2">
+      <div className="flex flex-col w-full h-full self-center gap-8">
         {bookmarks.map((bookmark) => (
-          <BookmarkCard
+          <SummaryCard
             key={bookmark.url}
-            title={bookmark.title}
-            summary={bookmark.summary}
-            isBookmarked={true}
-            addBookmark={() => addBookmark(bookmark)}
-            removeBookmark={() => removeBookmark(bookmark.url)}
-            toggleDetailsModal={() => onToggleDetailsModal(bookmark)}
+            article={bookmark}
+            showDetailsModal={() => showDetailsModal(bookmark)}
           />
         ))}
         {bookmarks.length < 1 ? (

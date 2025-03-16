@@ -1,18 +1,8 @@
 import React from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 
-const parseConclusion = (conclusion) => {
-  // Split the conclusion string into an array of bullet points
-  return conclusion
-    .split("\n")
-    .map((point) => point.substring(1).trim())
-    .filter((point) => point.length > 0);
-};
-
 const DetailsModal = ({ article, onClose }) => {
   if (!article) return null;
-
-  const bulletPoints = parseConclusion(article.conclusion);
 
   return (
     <div className="fixed pb-20 inset-0 bg-slate-700/90 flex justify-center items-center">
@@ -24,30 +14,17 @@ const DetailsModal = ({ article, onClose }) => {
           color="#817D82"
         />
 
-        <h2 className="text-xl font-bold mb-2 py-3 text-center">
-          Additional Information about this Article:
+        <h2 className="text-3xl font-semibold py-3 mb-4 text-center">
+          Additional Information about the Article
         </h2>
-
-        <p className="mb-1">
-          <strong className="relative group cursor-help font-semibold">
-            TLDR:
-            <span className="absolute bottom-full left-16 transform -translate-x-1/2 mb-2 w-36 p-2 bg-black text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              Too Long, Didn't Read
-            </span>
-          </strong>
+        <p className="mb-2 text-2xl font-medium text-gray-100">
+          Bias Analysis:
         </p>
-        <ul className="mb-8 ml-6 list-disc list-inside">
-          {bulletPoints.map((point, index) => (
-            <li key={index}>{point}</li>
-          ))}
-        </ul>
-        <p className="mb-8">
-          <strong className="font-semibold">Bias?</strong> {article.bias}
-        </p>
-        <p className="mb-1 font-extralight text-sm">
+        <p className="mb-8 text-lg font-normal text-gray-300">{article.bias}</p>
+        <p className="mb-1 font-light text-base text-gray-400">
           Created Time: {new Date(article.date).toLocaleString()}
         </p>
-        <p className="mb-2 font-extralight text-sm">
+        <p className="mb-2 font-light text-base text-gray-400">
           Original Source:{" "}
           <a
             href={article.url}

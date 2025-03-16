@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 function useHealthCheck() {
-  const [isRunning, setIsRunning] = useState(false);
+  const [isRunning, setIsRunning] = useState(null);
 
   useEffect(() => {
     const checkServerHealth = async () => {

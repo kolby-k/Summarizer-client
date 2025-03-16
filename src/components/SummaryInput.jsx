@@ -1,33 +1,42 @@
 // src/components/SummaryInput.js
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import LoadingSpinner from "./LoadingSpinner";
+import { useSummary } from "../context/SummaryContext";
 
-const SummaryInput = ({ onSuccess }) => {
+const SummaryInput = ({}) => {
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const { showSummary, bookmarks } = useSummary();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
 
+    const existingBookmark = bookmarks.find(
+      (bookmark) => bookmark.url === inputValue
+    );
+
+    if (existingBookmark) {
+      showSummary(existingBookmark);
+      return;
+    }
+
+    setLoading(true);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_SERVER_URL}/api/summary/`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ url: inputValue }),
         }
       );
 
       if (!response.ok) {
         const data = await response.json();
-
+        console.error("Error in request: ", data);
         if (data.error === "Could not extract main article content") {
           throw new Error(
             "Sorry, the website you requested has prevented our tool from processing a summary. Please try again with a different website."
@@ -37,9 +46,15 @@ const SummaryInput = ({ onSuccess }) => {
       }
 
       const data = await response.json();
-
-      data.url = inputValue;
-      onSuccess(data);
+      const newSummary = {
+        title: data.title,
+        summary: data.summary,
+        bias: data.bias,
+        url: data.url,
+        date: data.date,
+        user_id: data.user_id,
+      };
+      showSummary(newSummary);
       setInputValue("");
     } catch (error) {
       setError("Error generating summary: " + error.message);
@@ -66,7 +81,7 @@ const SummaryInput = ({ onSuccess }) => {
         <button
           type="submit"
           disabled={loading}
-          className="p-2 bg-blue-500 border border-blue-400 text-white rounded w-[25%] self-center hover:bg-blue-600 disabled:opacity-50"
+          className="p-2 bg-blue-500 border border-blue-400 text-white rounded w-[25%] self-center hover:bg-blue-400 disabled:opacity-50"
         >
           Generate Summary
         </button>
@@ -77,10 +92,6 @@ const SummaryInput = ({ onSuccess }) => {
       )}
     </div>
   );
-};
-
-SummaryInput.propTypes = {
-  onSuccess: PropTypes.func.isRequired,
 };
 
 export default SummaryInput;

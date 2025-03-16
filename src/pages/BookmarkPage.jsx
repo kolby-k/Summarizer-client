@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import Bookmarks from "../components/Bookmarks";
 import DetailsModal from "../components/DetailsModal";
-import { useBookmarks } from "../context/BookmarkContext";
+import useProtectedRoute from "../hooks/useProtectedRoute";
+import { useSummary } from "../context/SummaryContext";
 
 const BookmarkPage = () => {
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
+  const [detailModalContent, setDetailModalContent] = useState(null);
+  const { bookmarks } = useSummary();
 
-  const handleDetailsModal = (article) => {
-    setSelectedArticle(article);
-  };
+  useProtectedRoute();
 
-  const closeModal = () => {
-    setSelectedArticle(null);
+  const handleShowDetailsModal = (summary) => {
+    setDetailModalContent(summary);
   };
 
   return (
@@ -20,12 +19,13 @@ const BookmarkPage = () => {
       <h1 className="text-3xl text-center font-bold mb-6">Saved Articles</h1>
       <Bookmarks
         bookmarks={bookmarks}
-        addBookmark={addBookmark}
-        removeBookmark={removeBookmark}
-        onToggleDetailsModal={handleDetailsModal}
+        showDetailsModal={handleShowDetailsModal}
       />
-      {selectedArticle && (
-        <DetailsModal article={selectedArticle} onClose={closeModal} />
+      {detailModalContent && (
+        <DetailsModal
+          article={detailModalContent}
+          onClose={() => setDetailModalContent(null)}
+        />
       )}
     </div>
   );

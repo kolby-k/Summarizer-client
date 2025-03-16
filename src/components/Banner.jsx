@@ -64,11 +64,11 @@ const Banner = () => {
 
           {/* Right aligned items */}
           {user && (
-            <div className="flex mt-2 space-x-4">
+            <div className="flex mt-2 space-x-8 mr-6">
               <Link
                 to="/summary"
                 className={`hover:underline ${
-                  location.pathname === "/summary" ? "font-bold" : null
+                  location.pathname === "/summary" ? "font-semibold" : null
                 }`}
               >
                 Article Summarizer
@@ -76,7 +76,7 @@ const Banner = () => {
               <Link
                 to="/bookmarks"
                 className={`hover:underline ${
-                  location.pathname === "/bookmarks" ? "font-bold" : null
+                  location.pathname === "/bookmarks" ? "font-semibold" : null
                 }`}
               >
                 Saved Articles
