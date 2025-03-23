@@ -28,7 +28,7 @@ const Banner = () => {
   return (
     <>
       {showBanner && (
-        <div className="sticky top-0 w-full bg-slate-900 border-b border-white">
+        <div className="sticky flex flex-col justify-center top-0 w-full bg-slate-900 border-b border-white">
           <div className="p-2 text-center text-sm">
             Summarizer is a demo web application created by{" "}
             <a href="https://kolbyk.ca" className="underline text-blue-400">

@@ -90,7 +90,7 @@ const Home = () => {
             <a
               className="underline text-blue-500"
               target="_blank"
-              href="https://kolby-k.netlify.app/"
+              href="https://kolbyk.ca/"
             >
               Kolby Klassen's
             </a>{" "}

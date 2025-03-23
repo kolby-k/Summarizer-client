@@ -1,14 +1,20 @@
 // src/components/SummaryInput.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useSummary } from "../context/SummaryContext";
 
-const SummaryInput = ({}) => {
-  const [inputValue, setInputValue] = useState("");
+const SummaryInput = ({ exampleUrl = "", resetExample }) => {
+  const [inputValue, setInputValue] = useState(exampleUrl);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const { showSummary, bookmarks } = useSummary();
+
+  useEffect(() => {
+    if (exampleUrl) {
+      setInputValue(exampleUrl);
+    }
+  }, [exampleUrl]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,14 +71,11 @@ const SummaryInput = ({}) => {
 
   return (
     <div className="relative w-full">
-      <h2 className="text-lg md:text-xl font-medium leading-[1.2] mb-4 text-center">
-        Enter the URL of an article to summarize:
-      </h2>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
         <input
           type="text"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => (setInputValue(e.target.value), resetExample())}
           aria-label="URL Input"
           className="p-2 border-2 border-slate-300 rounded text-slate-700 w-[90%] self-center"
           placeholder="https://example.com"
