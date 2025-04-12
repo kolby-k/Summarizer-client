@@ -2,12 +2,16 @@
 import React, { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useSummary } from "../context/SummaryContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const SummaryInput = ({ exampleUrl = "", resetExample }) => {
   const [inputValue, setInputValue] = useState(exampleUrl);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
+  const { logout } = useAuth();
   const { showSummary, bookmarks } = useSummary();
 
   useEffect(() => {
@@ -42,11 +46,16 @@ const SummaryInput = ({ exampleUrl = "", resetExample }) => {
 
       if (!response.ok) {
         const data = await response.json();
-        console.error("Error in request: ", data);
+
         if (data.error === "Could not extract main article content") {
           throw new Error(
             "Sorry, the website you requested has prevented our tool from processing a summary. Please try again with a different website."
           );
+        } else if (response.status === 403) {
+          navigate("/");
+          window.alert("Please re-authenticate.");
+          logout();
+          return;
         }
         throw new Error("Network response was not ok");
       }

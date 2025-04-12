@@ -12,8 +12,8 @@ const EXAMPLES = [
     title: "Hockey News",
   },
   {
-    url: "https://www.infoplease.com/year-music",
-    source: "Infoplease.com",
+    url: "https://brilliantio.com/popular-music-in-the-2000s/",
+    source: "Brilliantio.com",
     title: "2000's Music Review",
   },
   {
